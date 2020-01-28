@@ -1,4 +1,4 @@
-package paulurl.shortener.security;
+package paulurl.shortener.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -2,12 +2,12 @@ package paulurl.shortener.model;
 
 import java.util.UUID;
 
-public class CustomURL {
+public class CustomUrl {
   private final String route;
   private final String originalURL;
   private final UUID userID;
 
-  public CustomURL(String route, String originalURL, UUID userID) {
+  public CustomUrl(String route, String originalURL, UUID userID) {
     this.route = route;
     this.originalURL = originalURL;
     this.userID = userID;
