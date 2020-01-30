@@ -2,19 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example </title>
+    <title>Paul URL | Admin Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/login.css" th:href="@{css/login.css}" />
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+    <div class="center-main">
+        <h1>Admin Login for URL Editing</h1>
+
+        <form th:action="@{/login}" method="post">
+            <div class="username"><label> User Name : <input type="text" name="username"/> </label></div>
+            <div class="password"><label> Password: <input type="password" name="password"/> </label></div>
+            <div class="submit"><input type="submit" value="Sign In"/></div>
+        </form>
+    </div>
+    <script th:if="${param.error}">
+        alert("Invalid username and password")
+        window.location.replace(window.location.href.split('?')[0]);
+    </script>
+    <script th:if="${param.logout}">
+        alert("You have been logged out.")
+        window.location.replace(window.location.href.split('?')[0]);
+    </script>
 </body>
 </html>

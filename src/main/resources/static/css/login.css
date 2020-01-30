@@ -1,0 +1,39 @@
+body, html {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    height: 100%;
+    display: grid;
+}
+
+.center-main {
+    margin: auto;
+    background-color: gray;
+    padding: 2em;
+    border-style: solid;
+    border-radius: 1em;
+}
+
+input {
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 0.25em;
+    border-style: solid;
+    border-width: thin;
+}
+
+.username {
+    padding-bottom: 1em;
+}
+
+.password {
+    padding-bottom: 1em;
+}
+
+.submit {
+    padding-top: 0.75em;
+}
+
+h1 {
+    margin: 0;
+    padding-bottom: 0.5em;
+}
