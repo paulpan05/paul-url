@@ -3,6 +3,7 @@ package paulurl.shortener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.GeneratedValue;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,11 @@ public class UrlController {
   @GetMapping
   public List<CustomUrl> getAllUrls() {
     return urlService.selectAllUrls();
+  }
+
+  @GetMapping("{route}")
+  public CustomUrl getSingleUrl(@PathVariable String route) {
+    return urlService.selectSingleUrl(route);
   }
 
   @PostMapping

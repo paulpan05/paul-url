@@ -1,6 +1,7 @@
 package paulurl.shortener;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,15 @@ public class UrlDataAccessObject {
             "description " +
             "FROM custom_url_table";
     return jdbcTemplate.query(sql, mapCustomUrlFromDB());
+  }
+
+  CustomUrl selectSingleUrl(String route) {
+    String sql = "" +
+            "SELECT " +
+            "* " +
+            "FROM custom_url_table " +
+            "WHERE route=?";
+    return jdbcTemplate.queryForObject(sql, new Object[]{route}, mapCustomUrlFromDB());
   }
 
   int updateOriginalUrl(String route, String curOriginal) {

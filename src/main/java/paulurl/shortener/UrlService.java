@@ -2,6 +2,7 @@ package paulurl.shortener;
 
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,14 @@ public class UrlService {
 
   List<CustomUrl> selectAllUrls() {
     return urlDataAccessObject.selectAllUrls();
+  }
+
+  CustomUrl selectSingleUrl(String route) {
+    try {
+      return urlDataAccessObject.selectSingleUrl(route);
+    } catch (DataAccessException e) {
+      throw new IllegalStateException("URL route does not exist");
+    }
   }
 
   void insertUrl(CustomUrl customUrl) {
