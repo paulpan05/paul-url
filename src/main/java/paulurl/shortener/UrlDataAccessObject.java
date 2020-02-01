@@ -1,10 +1,9 @@
-package paulurl.shortener.dao;
+package paulurl.shortener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import paulurl.shortener.model.CustomUrl;
 
 import java.util.List;
 
@@ -22,25 +21,26 @@ public class UrlDataAccessObject {
             "SELECT " +
             "id, " +
             "route, " +
-            "original_url " +
-            "FROM custom_url";
+            "original_url, " +
+            "description " +
+            "FROM custom_url_table";
     return jdbcTemplate.query(sql, mapCustomUrlFromDB());
-  }
-
-  int updateUrlRoute(String originalRoute, String modifiedRoute) {
-    String sql = "" +
-            "UPDATE custom_url " +
-            "SET route = ? " +
-            "WHERE route = ?";
-    return jdbcTemplate.update(sql, modifiedRoute, originalRoute);
   }
 
   int updateOriginalUrl(String route, String curOriginal) {
     String sql = "" +
-            "UPDATE custom_url " +
+            "UPDATE custom_url_table " +
             "SET original_url = ? " +
             "WHERE route = ?";
     return jdbcTemplate.update(sql, curOriginal, route);
+  }
+
+  int updateUrlDescription(String route, String description) {
+    String sql = "" +
+            "UPDATE custom_url_table " +
+            "SET description = ? " +
+            "WHERE route = ?";
+    return jdbcTemplate.update(sql, description, route);
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -48,7 +48,7 @@ public class UrlDataAccessObject {
     String sql = "" +
             "SELECT EXISTS (" +
             "SELECT 1 " +
-            "FROM custom_url " +
+            "FROM custom_url_table " +
             "WHERE route = ?" +
             ")";
     return jdbcTemplate.queryForObject(
@@ -58,28 +58,29 @@ public class UrlDataAccessObject {
     );
   }
 
-  int insertUrl(String route, String originalUrl) {
+  int insertUrl(String route, String originalUrl, String description) {
     String sql = "" +
-            "INSERT INTO custom_url (" +
+            "INSERT INTO custom_url_table (" +
             "route, " +
-            "original_url) " +
-            "VALUES (?, ?)";
-    return jdbcTemplate.update(sql, route, originalUrl);
+            "original_url, " +
+            "description) " +
+            "VALUES (?, ?, ?)";
+    return jdbcTemplate.update(sql, route, originalUrl, description);
   }
 
   int removeUrl(String route) {
     String sql = "" +
-            "DELETE FROM custom_url " +
+            "DELETE FROM custom_url_table " +
             "WHERE route = ?";
     return jdbcTemplate.update(sql, route);
   }
 
   private RowMapper<CustomUrl> mapCustomUrlFromDB() {
     return (resultSet, i) -> {
-      Integer id = Integer.valueOf(resultSet.getString("id"));
       String route = resultSet.getString("route");
       String originalUrl = resultSet.getString("original_url");
-      return new CustomUrl(id, route, originalUrl);
+      String description = resultSet.getString("description");
+      return new CustomUrl(route, originalUrl, description);
     };
   }
 }

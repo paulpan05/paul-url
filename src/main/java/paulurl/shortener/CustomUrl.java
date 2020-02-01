@@ -1,18 +1,14 @@
-package paulurl.shortener.model;
+package paulurl.shortener;
 
 public class CustomUrl {
-  private final Integer id;
   private final String route;
   private final String originalUrl;
+  private final String description;
 
-  public CustomUrl(Integer id, String route, String originalUrl) {
-    this.id = id;
+  public CustomUrl(String route, String originalUrl, String description) {
     this.route = route;
     this.originalUrl = originalUrl;
-  }
-
-  public Integer getId() {
-    return id;
+    this.description = description;
   }
 
   public String getRoute() {
@@ -21,5 +17,9 @@ public class CustomUrl {
 
   public String getOriginalUrl() {
     return originalUrl;
+  }
+
+  public String getDescription() {
+    return description;
   }
 }
