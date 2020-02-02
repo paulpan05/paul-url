@@ -19,6 +19,7 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-test'
 	runtime 'org.postgresql:postgresql'
 	compile 'commons-validator:commons-validator:1.6'
+	compile 'javax.xml.bind:jaxb-api:2.3.1'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
