@@ -1,7 +1,6 @@
 package paulurl.shortener;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -24,7 +23,7 @@ public class UrlDataAccessObject {
             "route, " +
             "original_url, " +
             "description " +
-            "FROM custom_url_table";
+            "FROM custom_url";
     return jdbcTemplate.query(sql, mapCustomUrlFromDB());
   }
 
@@ -32,14 +31,14 @@ public class UrlDataAccessObject {
     String sql = "" +
             "SELECT " +
             "* " +
-            "FROM custom_url_table " +
+            "FROM custom_url " +
             "WHERE route=?";
     return jdbcTemplate.queryForObject(sql, new Object[]{route}, mapCustomUrlFromDB());
   }
 
   int updateOriginalUrl(String route, String curOriginal) {
     String sql = "" +
-            "UPDATE custom_url_table " +
+            "UPDATE custom_url " +
             "SET original_url = ? " +
             "WHERE route = ?";
     return jdbcTemplate.update(sql, curOriginal, route);
@@ -47,7 +46,7 @@ public class UrlDataAccessObject {
 
   int updateUrlDescription(String route, String description) {
     String sql = "" +
-            "UPDATE custom_url_table " +
+            "UPDATE custom_url " +
             "SET description = ? " +
             "WHERE route = ?";
     return jdbcTemplate.update(sql, description, route);
@@ -58,7 +57,7 @@ public class UrlDataAccessObject {
     String sql = "" +
             "SELECT EXISTS (" +
             "SELECT 1 " +
-            "FROM custom_url_table " +
+            "FROM custom_url " +
             "WHERE route = ?" +
             ")";
     return jdbcTemplate.queryForObject(
@@ -70,7 +69,7 @@ public class UrlDataAccessObject {
 
   int insertUrl(String route, String originalUrl, String description) {
     String sql = "" +
-            "INSERT INTO custom_url_table (" +
+            "INSERT INTO custom_url (" +
             "route, " +
             "original_url, " +
             "description) " +
@@ -80,17 +79,18 @@ public class UrlDataAccessObject {
 
   int removeUrl(String route) {
     String sql = "" +
-            "DELETE FROM custom_url_table " +
+            "DELETE FROM custom_url " +
             "WHERE route = ?";
     return jdbcTemplate.update(sql, route);
   }
 
   private RowMapper<CustomUrl> mapCustomUrlFromDB() {
     return (resultSet, i) -> {
+      int id = Integer.parseInt(resultSet.getString("id"));
       String route = resultSet.getString("route");
       String originalUrl = resultSet.getString("original_url");
       String description = resultSet.getString("description");
-      return new CustomUrl(route, originalUrl, description);
+      return new CustomUrl(id, route, originalUrl, description);
     };
   }
 }

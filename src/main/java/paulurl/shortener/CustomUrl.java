@@ -1,14 +1,35 @@
 package paulurl.shortener;
 
-public class CustomUrl {
-  private final String route;
-  private final String originalUrl;
-  private final String description;
 
-  public CustomUrl(String route, String originalUrl, String description) {
+import javax.persistence.*;
+
+@Entity
+public class CustomUrl {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(unique = true, nullable = false)
+  private int id;
+
+  @Column(unique = true, nullable = false)
+  private String route;
+
+  @Column(nullable = false)
+  private String originalUrl;
+
+  @Column(nullable = false)
+  private String description;
+
+  public CustomUrl() {}
+
+  public CustomUrl(int id, String route, String originalUrl, String description) {
+    this.id = id;
     this.route = route;
     this.originalUrl = originalUrl;
     this.description = description;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getRoute() {
