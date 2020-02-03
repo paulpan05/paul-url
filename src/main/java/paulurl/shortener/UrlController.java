@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/api")
-@CrossOrigin(origins = "http://paulurl.com/", maxAge = 3600)
+@CrossOrigin
 public class UrlController {
   private final UrlService urlService;
 
