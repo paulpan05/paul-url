@@ -1,6 +1,5 @@
 package paulurl.shortener;
 
-
 import javax.persistence.*;
 
 @Entity
