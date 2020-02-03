@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://paulurl.com/", maxAge = 3600)
 @RestController
 @RequestMapping("v1/api")
+@CrossOrigin(origins = "http://paulurl.com/", maxAge = 3600)
 public class UrlController {
   private final UrlService urlService;
 
