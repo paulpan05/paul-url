@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/api")
-@CrossOrigin
 public class UrlController {
   private final UrlService urlService;
 
