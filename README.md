@@ -1,6 +1,6 @@
 # Paul URL Back-end
 
-[![Build Status](https://travis-ci.com/paulpan05/paul-url.svg?branch=master)](https://travis-ci.com/paulpan05/paul-url)
+[![Build Status](https://travis-ci.com/paulpan05/paul-url-backend.svg?branch=master)](https://travis-ci.com/paulpan05/paul-url-backend)
 
 URL shortener back-end for personal use. Hosted on Heroku.
 
