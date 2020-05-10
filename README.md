@@ -15,14 +15,14 @@ redirected to an admin dashboard where I can modify information.
 Non-admin users can access the pre-existing endpoints and the list of all routes shortened.
 
 The list of valid endpoints are:
- - https://paul-url.herokuapp.com/v1/api GET, POST, PUT
+ - https://paul-url.herokuapp.com/api/v1 GET, POST, PUT
     - GET: Gets the list of all routes (open to everyone)
     - POST: Updates route info with provided request body, need to supply the route to modify, can optionally specify
     modified original URL and modified description
     - PUT: Puts a new URL shortened route into the database. Need to supply the shortened route, the original url, the
     description of the route in the request body
     - DELETE: Deletes a shortened route based on the route name passed into the 
-  - https://paul-url.herokuapp.com/v1/api/{route} GET, DELETE
+  - https://paul-url.herokuapp.com/api/v1/{route} GET, DELETE
     - GET: Gets the specific route and its id, original url, and description (open to everyone)
 
 The request body for the API must be a JSON in the form {id, route, originalUrl, description}

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/api")
+@RequestMapping("api/v1")
 public class UrlController {
   private final UrlService urlService;
 
