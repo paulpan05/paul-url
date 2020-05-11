@@ -15,32 +15,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Value("${websecurity.username}")
-  private String username;
+    @Value("${websecurity.username}")
+    private String username;
 
-  @Value("${websecurity.password}")
-  private String password;
+    @Value("${websecurity.password}")
+    private String password;
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/v1/api", "/v1/api/{route}").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .httpBasic();
-  }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/v1/api", "/v1/api/{route}").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+    }
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.inMemoryAuthentication()
-            .passwordEncoder(passwordEncoder())
-            .withUser(username)
-            .password(passwordEncoder().encode(password))
-            .roles("USER");
-  }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .passwordEncoder(passwordEncoder())
+                .withUser(username)
+                .password(passwordEncoder().encode(password))
+                .roles("USER");
+    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

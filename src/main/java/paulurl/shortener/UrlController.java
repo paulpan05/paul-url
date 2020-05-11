@@ -8,35 +8,35 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1")
 public class UrlController {
-  private final UrlService urlService;
+    private final UrlService urlService;
 
-  @Autowired
-  public UrlController(UrlService urlService) {
-    this.urlService = urlService;
-  }
+    @Autowired
+    public UrlController(UrlService urlService) {
+        this.urlService = urlService;
+    }
 
-  @GetMapping
-  public List<CustomUrl> getAllUrls() {
-    return urlService.selectAllUrls();
-  }
+    @GetMapping
+    public List<CustomUrl> getAllUrls() {
+        return urlService.selectAllUrls();
+    }
 
-  @GetMapping("{route}")
-  public CustomUrl getSingleUrl(@PathVariable String route) {
-    return urlService.selectSingleUrl(route);
-  }
+    @GetMapping("{route}")
+    public CustomUrl getSingleUrl(@PathVariable String route) {
+        return urlService.selectSingleUrl(route);
+    }
 
-  @PostMapping
-  public void insertUrl(@RequestBody CustomUrl customUrl) {
-    urlService.insertUrl(customUrl);
-  }
+    @PostMapping
+    public void insertUrl(@RequestBody CustomUrl customUrl) {
+        urlService.insertUrl(customUrl);
+    }
 
-  @PutMapping
-  public void updateUrl(@RequestBody CustomUrl customUrl) {
-    urlService.updateUrl(customUrl);
-  }
+    @PutMapping
+    public void updateUrl(@RequestBody CustomUrl customUrl) {
+        urlService.updateUrl(customUrl);
+    }
 
-  @DeleteMapping("{route}")
-  public void removeUrl(@PathVariable String route) {
-    urlService.removeUrl(route);
-  }
+    @DeleteMapping("{route}")
+    public void removeUrl(@PathVariable String route) {
+        urlService.removeUrl(route);
+    }
 }
